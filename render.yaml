@@ -35,6 +35,6 @@ services:
 databases:
   - name: antalya-olimpiada-db
     # 0.1c-256mb ($6/oy): bepul baza 30 kundan keyin o‘chiriladi, pulligi o‘chmaydi.
-    plan: 0.1c-256mb
+    plan: free
     databaseName: antalya
     user: antalya
