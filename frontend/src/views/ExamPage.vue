@@ -112,7 +112,7 @@
       </template>
 
       <button v-if="currentStage === 1 && hasSecondStage" class="primary-btn finish-btn" :disabled="!isFirstStageComplete || submitting || finishModal.show" @click="openSecondStage">2-bosqichga o‘tish</button>
-      <button v-else class="primary-btn finish-btn" :disabled="submitting || finishModal.show" @click="confirmFinishOpen = true">{{ submitting ? 'Yakunlanmoqda...' : 'Testni yakunlash' }}</button>
+      <button v-else class="primary-btn finish-btn" :disabled="submitting || finishModal.show" @click="confirmFinishOpen = true">{{ submitting ? 'Submitting...' : 'Finish test' }}</button>
       <p v-if="currentStage === 1 && hasSecondStage && !isFirstStageComplete" class="stage-hint">2-bosqichga o‘tish uchun avval 20 ta savolning hammasiga javob bering.</p>
     </main>
 
