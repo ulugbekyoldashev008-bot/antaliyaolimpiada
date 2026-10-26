@@ -37,9 +37,7 @@
                 </button>
               </form>
 
-              <button type="button" class="xz-register-toggle" @click="openRegister">
-                <span>✍️</span> Ro‘yxatdan o‘tish
-              </button>
+            
             </template>
 
             <template v-else>
