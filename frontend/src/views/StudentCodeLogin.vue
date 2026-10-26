@@ -2,23 +2,18 @@
   <div class="student-entry-page xz-entry">
     <section class="xz-entry-grid">
       <div class="xz-entry-copy">
-        <span class="xz-kicker"><b>★</b> Antalya · Online olimpiada</span>
-        <h1 class="xz-title">Antalya<span>Olimpiadasi</span></h1>
-        <p class="xz-lead">
-          O‘rta dengiz sohilida bilim bellashuvi. Admin bergan status code bilan testga kiring,
-          savollarni ishlang va javoblaringizni yuboring.
-        </p>
+        <span class="xz-kicker"><b>★</b> Antalya · Online Olympiad</span>
+        <h1 class="xz-title">Antalya<span>Olympiad</span></h1>
 
         <div class="xz-stage-login">
           <div v-tilt="6" class="student-card entry-card xz-login-card">
             <div class="xz-card-badges">
-              <span>O‘QUVCHI KIRISHI</span>
-              <span>★ OLIMPIADA</span>
+              <span>STUDENT LOGIN</span>
+              <span>★ OLYMPIAD</span>
             </div>
 
             <template v-if="mode === 'code'">
-              <h2>Testga kirish</h2>
-              <p class="entry-subtitle">Admin bergan 6 xonali status code’ni kiriting.</p>
+              <h2>Enter the test</h2>
 
               <form @submit.prevent="startExam" class="code-form entry-form">
                 <label class="code-label">
@@ -33,63 +28,62 @@
                   />
                 </label>
                 <button class="primary-btn entry-start-btn" :disabled="loading">
-                  {{ loading ? 'Tekshirilmoqda...' : 'Testni boshlash' }}
+                  {{ loading ? 'Checking...' : 'Start test' }}
                 </button>
               </form>
 
-            
             </template>
 
             <template v-else>
-              <h2>Ro‘yxatdan o‘tish</h2>
-              <p class="entry-subtitle">Ma’lumotlaringizni kiriting, fan va darajani tanlang. Test darhol boshlanadi.</p>
+              <h2>Registration</h2>
+              <p class="entry-subtitle">Enter your details, choose a subject and level. The test starts right away.</p>
 
               <form @submit.prevent="register" class="xz-register-form">
                 <label>
-                  Ism familiya
-                  <input v-model.trim="reg.full_name" autocomplete="name" placeholder="Masalan: Aliyev Vali" required />
+                  Full name
+                  <input v-model.trim="reg.full_name" autocomplete="name" placeholder="For example: John Smith" required />
                 </label>
                 <label>
-                  O‘quv markaz
-                  <input v-model.trim="reg.center" list="xz-center-list" placeholder="O‘quv markaz nomini kiriting" required />
+                  Learning center
+                  <input v-model.trim="reg.center" list="xz-center-list" placeholder="Enter learning center name" required />
                   <datalist id="xz-center-list">
                     <option v-for="name in catalog.centers" :key="name" :value="name" />
                   </datalist>
                 </label>
                 <label class="xz-register-age">
-                  Yosh
+                  Age
                   <input v-model.number="reg.age" type="number" min="4" max="99" inputmode="numeric" placeholder="12" required />
                 </label>
                 <div class="xz-register-row">
                   <label>
-                    Fan
+                    Subject
                     <select v-model="reg.subject" required @change="reg.level = ''">
-                      <option value="" disabled>Fanni tanlang</option>
+                      <option value="" disabled>Choose a subject</option>
                       <option v-for="subject in catalog.subjects" :key="subject.id" :value="subject.id">{{ subject.name }}</option>
                     </select>
                   </label>
                   <label>
-                    Daraja
+                    Level
                     <select v-model="reg.level" required :disabled="!selectedSubject">
-                      <option value="" disabled>{{ selectedSubject ? 'Darajani tanlang' : 'Avval fanni tanlang' }}</option>
+                      <option value="" disabled>{{ selectedSubject ? 'Choose a level' : 'Choose a subject first' }}</option>
                       <option v-for="level in selectedSubject?.levels || []" :key="level.id" :value="level.id">{{ level.name }}</option>
                     </select>
                   </label>
                 </div>
                 <button class="primary-btn entry-start-btn" :disabled="loading || catalogLoading">
-                  {{ loading ? 'Test tayyorlanmoqda...' : 'Testga kirish' }}
+                  {{ loading ? 'Preparing test...' : 'Enter the test' }}
                 </button>
               </form>
 
               <button type="button" class="xz-register-toggle is-back" @click="closeRegister">
-                ← Status code bilan kirish
+                ← Log in with status code
               </button>
             </template>
 
             <p v-if="error" class="error-box">{{ error }}</p>
 
             <RouterLink to="/admin/login" class="admin-login-link entry-admin-link">
-              Admin panelga kirish
+              Admin panel login
             </RouterLink>
           </div>
         </div>
@@ -103,9 +97,9 @@
           <span>HIDIRLIK KULESİ</span>
         </div>
         <div class="xz-subjects xz-stage-subjects">
-          <span>🧮 Matematika</span>
+          <span>🧮 Mathematics</span>
           <span>💻 IT</span>
-          <span>🖥️ Kompyuter</span>
+          <span>🖥️ Computer</span>
           <span>🇬🇧 English</span>
         </div>
 
@@ -118,8 +112,8 @@
 
         <template v-if="!publicResult">
           <div class="result-modal-icon">📊</div>
-          <h2>Natijani ko‘rish</h2>
-          <p>Natijangizni ko‘rish uchun sizga berilgan 6 xonali status code’ni kiriting.</p>
+          <h2>View result</h2>
+          <p>Enter the 6-digit status code you were given to view your result.</p>
 
           <form @submit.prevent="lookupResult" class="result-lookup-form">
             <label class="code-label">
@@ -134,7 +128,7 @@
               />
             </label>
             <button class="primary-btn" :disabled="resultLoading">
-              {{ resultLoading ? 'Qidirilmoqda...' : 'Natijani ko‘rish' }}
+              {{ resultLoading ? 'Searching...' : 'View result' }}
             </button>
           </form>
 
@@ -143,28 +137,28 @@
 
         <template v-else>
           <div class="result-modal-icon success">✓</div>
-          <h2>Test yakunlandi</h2>
+          <h2>Test completed</h2>
           <p class="result-meta">
             {{ publicResult.student_full_name }} · {{ publicResult.subject_name }} · {{ publicResult.level_name }}
           </p>
 
           <div class="public-result-details">
             <div>
-              <span>Holat</span>
-              <b>Natija adminga yuborildi</b>
+              <span>Status</span>
+              <b>Result sent to the admin</b>
             </div>
             <div>
-              <span>O‘quv markaz</span>
+              <span>Learning center</span>
               <b>{{ publicResult.center_name }}</b>
             </div>
             <div>
-              <span>Sarflagan vaqt</span>
+              <span>Time spent</span>
               <b>{{ formatSeconds(publicResult.spent_seconds) }}</b>
             </div>
           </div>
 
           <button type="button" class="secondary-btn block-link" @click="resetResultLookup">
-            Boshqa code tekshirish
+            Check another code
           </button>
         </template>
       </div>
@@ -199,11 +193,30 @@ function cleanCode(value) {
   return String(value || '').trim()
 }
 
+// Backend xabarlari o'zbekcha, o'quvchiga inglizchasi ko'rsatiladi.
+const ERRORS_EN = {
+  'Status code kiriting.': 'Please enter the status code.',
+  'Status code yuborilmadi.': 'Please enter the status code.',
+  'Bunday code topilmadi.': 'This code was not found.',
+  'Bu code oldin ishlatilgan.': 'This code has already been used.',
+  'Bu test allaqachon yakunlangan.': 'This test has already been completed.',
+  'Bu fan va daraja uchun testlar hali qo‘shilmagan.': 'Tests for this subject and level have not been added yet.',
+  'Bu o‘quvchi hali testni yakunlamagan.': 'This student has not finished the test yet.',
+  'Bu code uchun natija topilmadi.': 'No result found for this code.',
+  'Juda ko‘p noto‘g‘ri code kiritildi. 10 daqiqadan keyin qayta urinib ko‘ring.': 'Too many wrong codes. Please try again in 10 minutes.',
+}
+
+function englishError(e, fallback) {
+  const detail = e.response?.data?.detail
+  if (e.response?.status === 429) return ERRORS_EN['Juda ko‘p noto‘g‘ri code kiritildi. 10 daqiqadan keyin qayta urinib ko‘ring.']
+  return ERRORS_EN[detail] || fallback
+}
+
 function formatSeconds(seconds) {
   const total = Number(seconds || 0)
   const min = Math.floor(total / 60)
   const sec = total % 60
-  return `${min} daq ${sec} sek`
+  return `${min} min ${sec} sec`
 }
 
 function openResultModal() {
@@ -235,7 +248,7 @@ async function startExam() {
   try {
     await openExam(cleanCode(code.value))
   } catch (e) {
-    error.value = e.response?.data?.detail || 'Code xato yoki oldin ishlatilgan.'
+    error.value = englishError(e, 'Invalid or already used code.')
   } finally {
     loading.value = false
   }
@@ -251,7 +264,7 @@ async function openRegister() {
     catalog.subjects = res.data.subjects || []
     catalog.centers = res.data.centers || []
   } catch (e) {
-    error.value = 'Fanlar ro‘yxatini yuklab bo‘lmadi. Sahifani yangilang.'
+    error.value = 'Could not load the subject list. Please refresh the page.'
   } finally {
     catalogLoading.value = false
   }
@@ -275,7 +288,7 @@ async function register() {
     code.value = res.data.code
     await openExam(res.data.code)
   } catch (e) {
-    error.value = e.response?.data?.detail || 'Ro‘yxatdan o‘tishda xatolik. Qayta urinib ko‘ring.'
+    error.value = englishError(e, 'Registration failed. Please try again.')
   } finally {
     loading.value = false
   }
@@ -289,7 +302,7 @@ async function lookupResult() {
     const res = await api.post('/exam/result/', { code: cleanCode(resultCode.value) })
     publicResult.value = res.data
   } catch (e) {
-    resultError.value = e.response?.data?.detail || 'Natija topilmadi.'
+    resultError.value = englishError(e, 'Result not found.')
   } finally {
     resultLoading.value = false
   }
