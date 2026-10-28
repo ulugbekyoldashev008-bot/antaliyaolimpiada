@@ -89,21 +89,7 @@
         </div>
       </div>
 
-      <div class="xz-stage">
-        <AntalyaScene />
-        <div class="xz-orbit-labels">
-          <span>KALEİÇİ</span>
-          <span>YİVLİ MİNARE</span>
-          <span>HIDIRLIK KULESİ</span>
-        </div>
-        <div class="xz-subjects xz-stage-subjects">
-          <span>🧮 Mathematics</span>
-          <span>💻 IT</span>
-          <span>🖥️ Computer</span>
-          <span>🇬🇧 English</span>
-        </div>
 
-      </div>
     </section>
 
     <div v-if="showResultModal" class="modal-backdrop result-lookup-backdrop" @click.self="closeResultModal">
