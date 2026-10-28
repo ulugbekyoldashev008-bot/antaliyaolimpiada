@@ -952,7 +952,7 @@ body::before {
 /* --------------------------------------------------------------------------
    Mobil
    -------------------------------------------------------------------------- */
-@media (max-width: 960px) {
+@media (max-width: 1200px) {
   .xz-entry-grid {
     grid-template-columns: 1fr;
     padding: 24px 16px 40px;
@@ -1855,7 +1855,7 @@ body::before {
 /* --------------------------------------------------------------------------
    Kichik telefonlar (300–420px): hech narsa ekrandan chiqib ketmasin
    -------------------------------------------------------------------------- */
-@media (max-width: 960px) {
+@media (max-width: 1200px) {
   .xz-entry-grid {
     grid-template-columns: minmax(0, 1fr);
   }
